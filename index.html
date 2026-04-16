@@ -1,0 +1,414 @@
+<style>
+  #zd-upcoming-events-widget {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #FFFFFF;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16);
+    line-height: 1.5;
+  }
+
+  #zd-upcoming-events-widget * {
+    box-sizing: border-box;
+  }
+
+  #zd-upcoming-events-widget .zd-header {
+    background: #92BF3B !important;
+    padding: 32px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 16px !important;
+  }
+
+  #zd-upcoming-events-widget .zd-header-content {
+    flex: 1;
+  }
+
+  #zd-upcoming-events-widget .zd-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  #zd-upcoming-events-widget .zd-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #D1F470;
+    color: #11110D;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    border: none;
+  }
+
+  #zd-upcoming-events-widget .zd-badge svg {
+    width: 10px;
+    height: 10px;
+  }
+
+  #zd-upcoming-events-widget .zd-title {
+    color: #FFFFFF !important;
+    font-size: 22px !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.3 !important;
+  }
+
+  #zd-upcoming-events-widget .zd-view-all-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #D1F470;
+    color: #11110D;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  #zd-upcoming-events-widget .zd-view-all-btn:hover {
+    background: #c4e85f;
+    transform: translateY(-1px);
+  }
+
+  #zd-upcoming-events-widget .zd-view-all-btn svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  #zd-upcoming-events-widget .zd-nav-arrows {
+    display: flex;
+    gap: 8px;
+  }
+
+  #zd-upcoming-events-widget .zd-nav-btn {
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 50%;
+    background: #2D4C33;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+  }
+
+  #zd-upcoming-events-widget .zd-nav-btn:hover {
+    background: #4E8336;
+  }
+
+  #zd-upcoming-events-widget .zd-nav-btn svg {
+    width: 16px;
+    height: 16px;
+    color: #FFFFFF;
+  }
+
+  #zd-upcoming-events-widget .zd-carousel-container {
+    padding: 28px 32px 32px;
+    background: #F5F5F2;
+    position: relative;
+  }
+
+  #zd-upcoming-events-widget .zd-carousel-container::after {
+    content: '';
+    position: absolute;
+    top: 20px;
+    right: 0;
+    bottom: 24px;
+    width: 60px;
+    background: linear-gradient(to right, transparent, #F5F5F2);
+    pointer-events: none;
+  }
+
+  #zd-upcoming-events-widget .zd-carousel {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-right: 40px;
+  }
+
+  #zd-upcoming-events-widget .zd-carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  #zd-upcoming-events-widget .zd-video-card {
+    flex: 0 0 320px !important;
+    min-height: 320px !important;
+    background: #FFFFFF !important;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  #zd-upcoming-events-widget .zd-video-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  }
+
+  #zd-upcoming-events-widget .zd-thumbnail {
+    position: relative;
+    width: 100% !important;
+    height: 200px !important;
+    min-height: 200px !important;
+    background: #FFFFFF !important;
+    overflow: hidden;
+    opacity: 1 !important;
+  }
+
+  #zd-upcoming-events-widget .zd-thumbnail img {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    opacity: 1 !important;
+    filter: none !important;
+  }
+
+  #zd-upcoming-events-widget .zd-event-type {
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    color: #6C6C68 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.8px !important;
+    margin: 0 0 6px 0 !important;
+    display: block !important;
+  }
+
+  #zd-upcoming-events-widget .zd-video-info {
+    padding: 24px 20px !important;
+  }
+
+  #zd-upcoming-events-widget .zd-video-title {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    color: #11110D !important;
+    margin: 0 0 6px 0 !important;
+    line-height: 1.4 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+
+  #zd-upcoming-events-widget .zd-video-meta {
+    font-size: 15px !important;
+    color: #6C6C68 !important;
+    margin: 0 !important;
+  }
+
+  #zd-upcoming-events-widget .zd-scroll-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 32px 0;
+    color: #6C6C68;
+    font-size: 12px;
+  }
+
+  #zd-upcoming-events-widget .zd-scroll-hint svg {
+    width: 16px;
+    height: 16px;
+    animation: bounce-right 1.5s infinite;
+  }
+
+  @keyframes bounce-right {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(5px); }
+  }
+
+  @media (max-width: 600px) {
+    #zd-upcoming-events-widget .zd-header {
+      padding: 20px !important;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    #zd-upcoming-events-widget .zd-header-actions {
+      width: 100%;
+      justify-content: space-between;
+      margin-top: 12px;
+    }
+
+    #zd-upcoming-events-widget .zd-carousel-container {
+      padding: 16px 20px 20px;
+    }
+
+    #zd-upcoming-events-widget .zd-video-card {
+      flex: 0 0 280px !important;
+    }
+  }
+</style>
+
+<section class="homepage-widget-wrapper">
+  <div class="sitewidth">
+    <div class="col">
+      <div class="zd-whats-new-widget" id="zd-upcoming-events-widget">
+        <div class="zd-header">
+          <div class="zd-header-content">
+            <span class="zd-badge">
+              <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+              </svg>
+              Upcoming events
+            </span>
+            <h2 class="zd-title">the digital desk</h2>
+          </div>
+          <div class="zd-header-actions">
+            <a href="https://community.zendesk.com/events?tab=upcoming" target="_blank" class="zd-view-all-btn">
+              View all upcoming events
+              <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+            </a>
+            <div class="zd-nav-arrows">
+              <button class="zd-nav-btn" onclick="this.closest('.zd-whats-new-widget').querySelector('.zd-carousel').scrollBy({left: -276, behavior: 'smooth'})">
+                <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+              <button class="zd-nav-btn" onclick="this.closest('.zd-whats-new-widget').querySelector('.zd-carousel').scrollBy({left: 276, behavior: 'smooth'})">
+                <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="zd-carousel-container">
+          <div class="zd-carousel">
+
+            <!-- VIDEO 1 -->
+            <a href="https://zendesk.zoom.us/webinar/register/3217751573459/WN_xTRSv0KBSUmk6JqUEBlhuA#/registration" target="_blank" class="zd-video-card">
+              <div class="zd-thumbnail">
+                <img src="https://z3nemmacollins.zendesk.com/hc/article_attachments/48706483535387" alt="Event 1">
+              </div>
+              <div class="zd-video-info">
+                <span class="zd-event-type">Copilot</span>
+                <h3 class="zd-video-title">Simplify Your CX Operations with Zendesk Copilot</h3>
+                <p class="zd-video-meta">April 15</p>
+              </div>
+            </a>
+
+            <!-- VIDEO 2 -->
+            <a href="https://zendesk.zoom.us/webinar/register/1017751395583/WN_VpvjwzQGTtSSUcKaagNJAg#/registration" target="_blank" class="zd-video-card">
+              <div class="zd-thumbnail">
+                <img src="https://z3nemmacollins.zendesk.com/hc/article_attachments/48706454307483" alt="Event 2">
+              </div>
+              <div class="zd-video-info">
+                <span class="zd-event-type">Onboarding</span>
+                <h3 class="zd-video-title">Agent Fundamentals: Getting Started in Zendesk</h3>
+                <p class="zd-video-meta">April 16</p>
+              </div>
+            </a>
+            <!-- EVENT 3 -->
+            <a href="https://zendesk.zoom.us/webinar/register/7317752078586/WN_hrAAI6M5TVeHcmerEYO1-A#/registration" target="_blank" class="zd-video-card">
+              <div class="zd-thumbnail">
+                <img src="https://z3nemmacollins.zendesk.com/hc/article_attachments/48706454309531" alt="Event 3">
+              </div>
+              <div class="zd-video-info">
+                <span class="zd-event-type">Knowledge</span>
+                <h3 class="zd-video-title">Turn Your Employee Help Center Into a Self-Service Engine</h3>
+                <p class="zd-video-meta">April 21</p>
+              </div>
+            </a>
+
+            <!-- EVENT 4 -->
+            <a href="https://zendesk.zoom.us/webinar/register/8617752094447/WN_xbnWJrZCR1OkF93S54FeFw#/registration" target="_blank" class="zd-video-card">
+              <div class="zd-thumbnail">
+                <img src="https://z3nemmacollins.zendesk.com/hc/article_attachments/48706483529371" alt="Event 4">
+              </div>
+              <div class="zd-video-info">
+                <span class="zd-event-type">Foundational Support</span>
+                <h3 class="zd-video-title">Designing Intelligent Omnichannel Routing in Zendesk</h3>
+                <p class="zd-video-meta">April 23</p>
+              </div>
+            </a>
+
+            <!-- EVENT 5 -->
+            <a href="https://zendesk.zoom.us/webinar/register/7217752451272/WN_LNkiVP-sTY6E_K6oqDDbDA#/registration" target="_blank" class="zd-video-card">
+              <div class="zd-thumbnail">
+                <img src="https://z3nemmacollins.zendesk.com/hc/article_attachments/48706454311195" alt="Event 5">
+              </div>
+              <div class="zd-video-info">
+                <span class="zd-event-type">Copilot</span>
+                <h3 class="zd-video-title">Turn Your Copilot Insights into Workflows</h3>
+                <p class="zd-video-meta">April 28</p>
+              </div>
+            </a>
+
+            <!-- EVENT 6 -->
+            <a href="https://zendesk.zoom.us/webinar/register/6217752472180/WN_Boj7n1E9QqyIa2HnOEIXWA#/registration" target="_blank" class="zd-video-card">
+              <div class="zd-thumbnail">
+                <img src="https://z3nemmacollins.zendesk.com/hc/article_attachments/48706454305051" alt="Event 6">
+              </div>
+              <div class="zd-video-info">
+                <span class="zd-event-type">Foundational Support</span>
+                <h3 class="zd-video-title">Zendesk Essentials: Tools & Rules That Make Zendesk Work</h3>
+                <p class="zd-video-meta">April 30</p>
+              </div>
+            </a>
+
+
+
+          </div>
+          
+          <div class="zd-scroll-hint">
+            <span>Scroll for more</span>
+            <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const cards = document.querySelectorAll("#zd-upcoming-events-widget .zd-video-card");
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    cards.forEach(function (card) {
+      const metaEl = card.querySelector(".zd-video-meta");
+      if (!metaEl) return;
+
+      const dateText = metaEl.textContent.trim();
+      const eventDate = new Date(dateText + " 2025");
+
+      // Try with 2026 if 2025 parse fails or is too far in past
+      const eventDate2026 = new Date(dateText + " 2026");
+
+      // Use whichever year is closest to today
+      const parsed = Math.abs(eventDate2026 - today) < Math.abs(eventDate - today)
+        ? eventDate2026
+        : eventDate;
+
+      if (!isNaN(parsed) && parsed < today) {
+        card.remove();
+      }
+    });
+  });
+</script>
